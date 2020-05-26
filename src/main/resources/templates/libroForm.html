@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Nuevo libro</title>
+    <link href="/css/styles.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<form class="form-style" th:action="@{/guardarLibro}" th:object="${libro}" method="post">
+    <fieldset>
+        <h1>Agregar libro</h1>
+        <label>Titulo:</label>
+        <input type="text" th:field="*{nombre}">
+        <span th:errors="*{nombre}" style="color: red"></span><br>
+        <br>
+        <label>Autor:</label>
+        <input type="text" th:field="*{autor}">
+        <span th:errors="*{autor}" style="color: red"></span><br>
+        <br>
+        <label>ISBN:</label>
+        <input type="text" th:field="*{isbn}">
+        <span th:errors="*{isbn}" style="color: red"></span><br>
+        <br>
+        <label>Categoria: </label>
+        <select th:field="*{categoria.codigoCategoria}">
+            <option th:each="item : ${categoriaList}"
+                    th:value="${item.codigoCategoria}"
+                    th:text="${item.nombreCategoria}">
+        </select>
+        <span th:errors="*{categoria}" style="color: red"></span><br><br>
+
+        <label>Estado:</label><br>
+        <label>Activo:</label>
+        <input type="checkbox" th:field="*{estado}" th:value="${true}">
+        <label>Inactivo:</label>
+        <input type="checkbox" th:field="*{estado}" th:value="${false}">
+        <br>
+        <input type="submit" value="Guardar">
+    </fieldset>
+</form>
+
+</body>
+</html>
